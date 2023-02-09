@@ -4,6 +4,7 @@ import { useState } from "react";
 import { trpc } from "../utils/trpc";
 
 import "./App.css";
+import NoteForm from "./components/NoteForm";
 import NotesList from "./components/NotesList";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
+        <NoteForm />
         <NotesList />
       </QueryClientProvider>
     </trpc.Provider>

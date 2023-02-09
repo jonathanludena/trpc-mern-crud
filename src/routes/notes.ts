@@ -1,6 +1,7 @@
 import { publicProcedure, router } from "../trpc";
+import { z } from "zod";
 
-// Query para obtener datos
+// Queries get data
 const getNotes = publicProcedure.query(() => {
   return [
     {
@@ -11,6 +12,18 @@ const getNotes = publicProcedure.query(() => {
   ];
 });
 
+// Queries mutation data
+const createNote = publicProcedure
+  .input(z.object({ 
+    title: z.string(), 
+    description: z.string().optional() 
+  }))
+  .mutation(({ input }) => {
+    console.log("input", input);
+    return "received";
+  });
+
 export const notesRouter = router({
   get: getNotes,
+  create: createNote,
 });
